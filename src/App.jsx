@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function App() {
 	return (
 		<div>
@@ -8,25 +10,19 @@ function App() {
 
 export default App;
 
-function onClickHandler(event) {
-	console.log(event);
-}
-
 function AppTitle() {
+	const [message, setMessage] = useState("Hello World");
+
+	function onClickHandler(event) {
+		console.log(event);
+		setMessage("Button Clicked");
+	}
+
 	return (
 		<div>
 			<h1>Code With Hichem</h1>
-			<button
-				// onClick={(e) => onClickHandler(e)}
-				// onMouseOver={(e) => onClickHandler(e)}
-				// onMouseOut={(e) => onClickHandler(e)}
-				// onMouseMove={(e) => onClickHandler(e)}
-				// onMouseDown={(e) => onClickHandler(e)}
-				// onMouseUp={(e) => onClickHandler(e)}
-				onDoubleClick={(e) => onClickHandler(e)}
-			>
-				Button
-			</button>
+			<p>{message}</p>
+			<button onClick={(e) => onClickHandler(e)}>Button</button>
 		</div>
 	);
 }

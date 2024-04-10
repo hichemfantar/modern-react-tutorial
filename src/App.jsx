@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 	return (
@@ -55,6 +55,14 @@ function TodoList() {
 		setTodos(newTodos);
 		setNewTodo("");
 	}
+
+	useEffect(() => {
+		console.log("component rendered for the first time");
+	}, []);
+
+	useEffect(() => {
+		console.log("input is", newTodo);
+	}, [newTodo]);
 
 	return (
 		<div>

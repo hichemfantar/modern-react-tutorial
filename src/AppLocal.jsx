@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { useFetch } from "./useFetch";
 
 function App() {
 	return (
@@ -13,14 +12,13 @@ function App() {
 export default App;
 
 function TodoList() {
-	const [newTodo, setNewTodo] = useState("");
+	const [todos, setTodos] = useState([
+		{ id: 1, text: "Learn React", completed: false },
+		{ id: 2, text: "Learn Redux", completed: false },
+		{ id: 3, text: "Learn React Router", completed: false },
+	]);
 
-	const {
-		data: todos,
-		isLoading,
-		error,
-		setData: setTodos,
-	} = useFetch("http://localhost:3000/todos");
+	const [newTodo, setNewTodo] = useState("");
 
 	function toggleTodo(id) {
 		const newTodos = todos.map((todo) => {
@@ -89,9 +87,6 @@ function TodoList() {
 				<button type="submit">Add todo</button>
 			</form>
 
-			{isLoading ? <p>Loading...</p> : null}
-
-			{error ? <p style={{ color: "red" }}>{error}</p> : null}
 			<ul>
 				{todos.map((todo) => (
 					<TodoItem

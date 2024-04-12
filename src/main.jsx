@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import CreateTodo from "./CreateTodo";
+import TodoDetails from "./TodoDetails";
 
 const router = createBrowserRouter([
 	{
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
 	{
 		path: "/create-todo",
 		element: <CreateTodo />,
+	},
+	{
+		path: "/todos/:todoId",
+		element: <TodoDetails />,
 	},
 ]);
 

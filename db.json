@@ -1,7 +1,59 @@
 {
 	"todos": [
-		{ "id": 1, "text": "Learn React", "completed": false },
-		{ "id": 2, "text": "Learn Redux", "completed": false },
-		{ "id": 3, "text": "Learn React Router", "completed": false }
+		{
+			"id": 1,
+			"text": "Learn React",
+			"completed": true
+		},
+		{
+			"id": 2,
+			"text": "Learn Redux",
+			"completed": false
+		},
+		{
+			"id": 3,
+			"text": "Learn React Router",
+			"completed": false
+		},
+		{
+			"text": "ezf",
+			"completed": false,
+			"id": 4
+		},
+		{
+			"text": "new todo",
+			"completed": false,
+			"id": 5
+		},
+		{
+			"text": "learn angular",
+			"completed": false,
+			"id": 6
+		},
+		{
+			"text": "new todo",
+			"completed": false,
+			"id": 7
+		},
+		{
+			"text": "new todo",
+			"completed": false,
+			"id": 8
+		},
+		{
+			"text": "new todo",
+			"completed": false,
+			"id": 9
+		},
+		{
+			"text": "learn react",
+			"completed": false,
+			"id": 10
+		},
+		{
+			"text": "new todo",
+			"completed": false,
+			"id": 11
+		}
 	]
 }

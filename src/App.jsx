@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useFetch } from "./useFetch";
+import { Link } from "react-router-dom";
 
 function App() {
 	return (
@@ -13,7 +14,7 @@ function App() {
 export default App;
 
 function TodoList() {
-	const [newTodo, setNewTodo] = useState("");
+	const [newTodo] = useState("");
 
 	const {
 		data: todos,
@@ -33,29 +34,16 @@ function TodoList() {
 		setTodos(newTodos);
 	}
 
-	function clearTodos() {
-		setTodos([]);
-	}
+	async function removeTodo(id) {
+		await fetch(`http://localhost:3000/todos/${id}`, {
+			method: "DELETE",
+		});
 
-	function removeCompletedTodos() {
-		const newTodos = todos.filter((todo) => !todo.completed);
-		setTodos(newTodos);
-	}
+		const newTodos = await fetch(`http://localhost:3000/todos`);
 
-	function removeTodo(id) {
-		const newTodos = todos.filter((todo) => todo.id !== id);
-		setTodos(newTodos);
-	}
+		const parsedNewTodos = await newTodos.json();
 
-	function AddTodo() {
-		const newTodoObject = {
-			id: Math.random(),
-			text: newTodo,
-			completed: false,
-		};
-		const newTodos = [newTodoObject, ...todos];
-		setTodos(newTodos);
-		setNewTodo("");
+		setTodos(parsedNewTodos);
 	}
 
 	useEffect(() => {
@@ -69,38 +57,23 @@ function TodoList() {
 	return (
 		<div>
 			<h2>Todo List</h2>
-			<button onClick={clearTodos}>Clear All</button>
-			<button onClick={removeCompletedTodos}>Clear Completed</button>
-			<form
-				onSubmit={(event) => {
-					event.preventDefault();
-					AddTodo();
-				}}
-			>
-				<input
-					required
-					type="text"
-					placeholder="New todo"
-					onChange={(event) => {
-						setNewTodo(event.target.value);
-					}}
-					value={newTodo}
-				/>
-				<button type="submit">Add todo</button>
-			</form>
+
+			<Link to="/create-todo">Create Todo</Link>
 
 			{isLoading ? <p>Loading...</p> : null}
 
 			{error ? <p style={{ color: "red" }}>{error}</p> : null}
 			<ul>
-				{todos.map((todo) => (
-					<TodoItem
-						key={todo.id}
-						todo={todo}
-						toggleTodo={toggleTodo}
-						removeTodo={removeTodo}
-					/>
-				))}
+				{todos
+					? todos.map((todo) => (
+							<TodoItem
+								key={todo.id}
+								todo={todo}
+								toggleTodo={toggleTodo}
+								removeTodo={removeTodo}
+							/>
+					  ))
+					: null}
 			</ul>
 		</div>
 	);
@@ -128,6 +101,7 @@ function TodoItem(props) {
 				{todo.text}
 			</span>
 			<button onClick={() => removeTodo(todo.id)}>Delete</button>
+			<Link to={`/todos/${todo.id}`}>Details</Link>
 		</li>
 	);
 }
